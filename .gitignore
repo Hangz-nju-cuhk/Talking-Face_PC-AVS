@@ -107,15 +107,13 @@ venv.bak/
 # custom
 demo/
 checkpoints/
-mmaction/version.py
+results/
 .vscode
 .idea
 *.pkl
 *.pkl.json
 *.log.json
 work_dirs/
-*.mp3
-*.mp4
 *.avi
 
 # Pytorch

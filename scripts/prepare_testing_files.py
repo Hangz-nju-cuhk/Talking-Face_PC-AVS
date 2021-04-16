@@ -1,9 +1,9 @@
-import argparse
+import sys
 import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+import argparse
 import glob
 import csv
-import sys
-sys.path.append('..')
 import numpy as np
 from config.AudioConfig import AudioConfig
 
@@ -14,7 +14,7 @@ def mkdir(path):
 
 
 def proc_frames(src_path, dst_path):
-    cmd = 'ffmpeg -i \"{}\" -qscale:v 2 \"{}\"/%06d.jpg -loglevel error -y'.format(src_path, dst_path)
+    cmd = 'ffmpeg -i \"{}\" -start_number 0 -qscale:v 2 \"{}\"/%06d.jpg -loglevel error -y'.format(src_path, dst_path)
     os.system(cmd)
     frames = glob.glob(os.path.join(dst_path, '*.jpg'))
     return len(frames)
@@ -30,17 +30,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     # parser.add_argument('--dst_dir_path', default='/mnt/lustre/DATAshare3/VoxCeleb2',
     #                     help="dst file position")
-    parser.add_argument('--dir_path', default='../misc',
+    parser.add_argument('--dir_path', default='./misc',
                         help="dst file position")
-    parser.add_argument('--src_pose_path', default='/home/SENSETIME/zhouhang1/Documents/talkingface/checkpoints/demo_vox5/others/00473.mp4',
-                        help="pose source file position")
-    parser.add_argument('--src_audio_path', default='/home/SENSETIME/zhouhang1/Documents/talkingface/checkpoints/demo_vox5/left/00013.mp4',
-                        help="audio source file position")
+    parser.add_argument('--src_pose_path', default='./misc/Pose_Source/00473.mp4',
+                        help="pose source file position, this could be an mp4 or a folder")
+    parser.add_argument('--src_audio_path', default='./misc/Audio_Source/00015.mp4',
+                        help="audio source file position, it could be an mp3 file or an mp4 video with audio")
     parser.add_argument('--src_mouth_frame_path', default=None,
-                        help="mouth frame file position")
-    parser.add_argument('--src_input_path', default='/home/SENSETIME/zhouhang1/Documents/pcavs/misc/demo_audio_frames/681600002/000001.jpg',
-                        help="input file position")
-    parser.add_argument('--csv_path', default='./misc/demo.csv',
+                        help="mouth frame file position, the video frames synced with audios")
+    parser.add_argument('--src_input_path', default='./misc/Input/00098.mp4',
+                        help="input file position, it could be a folder with frames, a jpg or an mp4")
+    parser.add_argument('--csv_path', default='./misc/demo2.csv',
                         help="path to output index files")
     parser.add_argument('--convert_spectrogram', action='store_true', help='whether to convert audio to spectrogram')
 
@@ -112,3 +112,6 @@ if __name__ == "__main__":
         writer = csv.writer(csvfile, delimiter=' ', quoting=csv.QUOTE_MINIMAL)
         writer.writerows([[dst_input_path, str(num_inputs), dst_pose_frame_path, str(num_pose_frames),
                            dst_audio_path, dst_mouth_frame_path, str(num_mouth_frames), spec_dir]])
+        print('meta-info saved at ' + args.csv_path)
+
+    csvfile.close()

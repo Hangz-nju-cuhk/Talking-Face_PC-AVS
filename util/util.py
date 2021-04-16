@@ -97,6 +97,8 @@ def tensor2im(image_tensor, imtype=np.uint8, normalize=True, tile=True):
 def save_image(image_numpy, image_path, create_dir=False):
     if create_dir:
         os.makedirs(os.path.dirname(image_path), exist_ok=True)
+    if len(image_numpy.shape) == 4:
+        image_numpy = image_numpy[0]
     if len(image_numpy.shape) == 2:
         image_numpy = np.expand_dims(image_numpy, axis=2)
     if image_numpy.shape[2] == 1:

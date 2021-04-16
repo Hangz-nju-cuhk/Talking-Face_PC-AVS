@@ -439,7 +439,6 @@ class AvModel(torch.nn.Module):
         return obj_ts
 
     def generate_fake(self, id_feature, pose_feature):
-        # import pdb; pdb.set_trace()
         pose_feature = pose_feature.view(-1, pose_feature.shape[-1])
         style = torch.cat([id_feature[0], pose_feature], 1)
         style = [style]

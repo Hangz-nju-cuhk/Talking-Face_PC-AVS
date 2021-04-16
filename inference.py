@@ -50,7 +50,7 @@ def inference_single_audio(opt, path_label, model):
 
     idx = 0
     if opt.driving_pose:
-        video_names = ['Input_', 'G_Fix_Pose_', 'G_Pose_Driven_', 'Pose_Source_', 'Mouth_Source_']
+        video_names = ['Input_', 'G_Pose_Driven_', 'Pose_Source_', 'Mouth_Source_']
     else:
         video_names = ['Input_', 'G_Fix_Pose_', 'Mouth_Source_']
     save_paths = []
@@ -64,13 +64,14 @@ def inference_single_audio(opt, path_label, model):
 
         for num in range(len(fake_image_driven_pose_a)):
             util.save_torch_img(data_i['input'][num], os.path.join(save_paths[0], video_names[0] + str(idx) + '.jpg'))
-            util.save_torch_img(fake_image_original_pose_a[num],
-                     os.path.join(save_paths[1], video_names[1] + str(idx) + '.jpg'))
             if opt.driving_pose:
                 util.save_torch_img(fake_image_driven_pose_a[num],
-                         os.path.join(save_paths[2], video_names[2] + str(idx) + '.jpg'))
+                         os.path.join(save_paths[1], video_names[1] + str(idx) + '.jpg'))
                 util.save_torch_img(data_i['driving_pose_frames'][num],
-                         os.path.join(save_paths[3], video_names[3] + str(idx) + '.jpg'))
+                         os.path.join(save_paths[2], video_names[2] + str(idx) + '.jpg'))
+            else:
+                util.save_torch_img(fake_image_original_pose_a[num],
+                                    os.path.join(save_paths[1], video_names[1] + str(idx) + '.jpg'))
             util.save_torch_img(data_i['target'][num], os.path.join(save_paths[-1], video_names[-1] + str(idx) + '.jpg'))
             idx += 1
 

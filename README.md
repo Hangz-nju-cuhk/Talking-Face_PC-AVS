@@ -10,10 +10,7 @@
 
 We propose **Pose-Controllable Audio-Visual System (PC-AVS)**, which achieves free pose control when driving arbitrary talking faces with audios. Instead of learning pose motions from audios, we leverage another pose source video to compensate only for head motions.
 
-## Requirements
-* [python 3.6](https://www.python.org/downloads/)
-* [PyTorch](https://pytorch.org/) (We use version 1.3.1)
-
+<img src='./misc/demo.gif' width=720>
 
 ## Requirements
 * Python 3.6 and [Pytorch](https://pytorch.org/) 1.3.0 are used. Basic requirements are listed in the 'requirements.txt'.
@@ -23,8 +20,8 @@ pip install -r requirements.txt
 ```
 
 
-## Generate Demo Results
-* Download the pre-trained models [checkpoint](https://drive.google.com/file/d/1Zehr3JLIpzdg2S5zZrhIbpYPKF-4gKU_/view?usp=sharing)
+## Quick Start: Generate Demo Results
+* Download the pre-trained models named demo.zip from [checkpoint](https://drive.google.com/file/d/1Zehr3JLIpzdg2S5zZrhIbpYPKF-4gKU_/view?usp=sharing).
 
 ``` bash
 Create the default folder "checkpoints" and put the checkpoint in it.
@@ -37,12 +34,10 @@ Unzip it within "checkpoints", there should be a "demo" folder containing 5 pths
 bash experiments/demo_vox.sh
 ```
 
-<img src='./misc/demo.gif' width=720>
-
-## Create Demo Files
+## Formulate Demo Files
 * Coming soon
 
-## Train your own model
+## Train Your Own Model
 * Coming soon
 
 ## License and Citation

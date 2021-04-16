@@ -5,6 +5,7 @@ from config import AudioConfig
 import shutil
 import cv2
 import glob
+import random
 import torch
 from data.base_dataset import BaseDataset
 import util.util as util
@@ -109,6 +110,7 @@ class VOXTestDataset(BaseDataset):
         self.dataset_size = len(self.target_frame_inds)
 
         id_img_paths = glob.glob(os.path.join(id_path, '*.jpg')) + glob.glob(os.path.join(id_path, '*.png'))
+        random.shuffle(id_img_paths)
         opt.num_inputs = min(len(id_img_paths), opt.num_inputs)
         id_img_tensors = []
 
@@ -116,7 +118,7 @@ class VOXTestDataset(BaseDataset):
             id_img_tensor = self.to_Tensor(self.load_img(image_path))
             id_img_tensors += [id_img_tensor]
             shutil.copyfile(image_path, os.path.join(self.processed_file_savepath, 'ref_id_{}.jpg'.format(i)))
-            if i == opt.num_inputs:
+            if i == (opt.num_inputs - 1):
                 break
         self.id_img_tensor = torch.stack(id_img_tensors)
         self.pose_frame_path = pose_frame_path

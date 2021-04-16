@@ -15,7 +15,7 @@ python -u inference.py  \
         --num_inputs 1 \
         --gpu_ids 0 \
         --clip_len 1 \
-        --batchSize 8 \
+        --batchSize 16 \
         --model av \
         --style_dim 2560 \
         --nThreads 4 \
