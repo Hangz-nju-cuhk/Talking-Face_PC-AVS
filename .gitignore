@@ -105,7 +105,6 @@ venv.bak/
 .mypy_cache/
 
 # custom
-misc/
 demo/
 checkpoints/
 mmaction/version.py
@@ -115,7 +114,6 @@ mmaction/version.py
 *.pkl.json
 *.log.json
 work_dirs/
-*.jpg
 *.mp3
 *.mp4
 *.avi
