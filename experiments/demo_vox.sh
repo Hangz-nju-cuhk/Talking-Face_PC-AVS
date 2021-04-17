@@ -3,6 +3,7 @@ meta_path_vox='./misc/demo.csv'
 
 python -u inference.py  \
         --name demo \
+        --meta_path_vox ${meta_path_vox} \
         --list_start 0 \
         --list_end 1 \
         --dataset_mode voxtest \
@@ -27,5 +28,4 @@ python -u inference.py  \
         --noise_pose \
         --driving_pose \
         --gen_video \
-        --meta_path_vox ${meta_path_vox} \
         --generate_from_audio_only \
