@@ -1,11 +1,8 @@
 meta_path_vox='./misc/demo.csv'
 
-
 python -u inference.py  \
         --name demo \
         --meta_path_vox ${meta_path_vox} \
-        --list_start 0 \
-        --list_end 1 \
         --dataset_mode voxtest \
         --netG modulate \
         --netA resseaudio \
@@ -13,14 +10,12 @@ python -u inference.py  \
         --netD multiscale \
         --netV resnext \
         --netE fan \
-        --num_inputs 1 \
+        --model av \
         --gpu_ids 0 \
         --clip_len 1 \
         --batchSize 16 \
-        --model av \
         --style_dim 2560 \
         --nThreads 4 \
-        --norm_D spectralsyncbatch \
         --input_id_feature \
         --generate_interval 1 \
         --style_feature_loss \

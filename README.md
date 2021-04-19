@@ -5,12 +5,13 @@
 
 <img src='./misc/demo.gif' width=720>
 
-### [Project](https://hangz-nju-cuhk.github.io/projects/PC-AVS) | [Paper](https://arxiv.org/abs/1807.07860) | [Demo](https://www.youtube.com/watch?v=-J2zANwdjcQ)
+### [Project](https://hangz-nju-cuhk.github.io/projects/PC-AVS) | [Paper](https://arxiv.org/abs/1807.07860) | [Demo](https://www.youtube.com/watch?v=lNQQHIggnUg)
 
 
 We propose **Pose-Controllable Audio-Visual System (PC-AVS)**, 
 which achieves free pose control when driving arbitrary talking faces with audios. Instead of learning pose motions from audios, we leverage another pose source video to compensate only for head motions.
-
+The key is to devise an implicit low-dimension pose code that is free of mouth shape or identity information. 
+In this way, audio-visual representations are modularized into spaces of three key factors: speech content, head pose, and identity information.
 
 <img src='./misc/method.png' width=880>
 
@@ -28,7 +29,7 @@ pip install -r requirements.txt
 * Create the default folder ```./checkpoints``` and 
 unzip the ```demo.zip``` at ```./checkpoints/demo```. There should be a 5 ```pth```s in it.
 
-* Download the examples, and unzip them in the ```misc``` folder.
+* Unzip all ```*.zip``` files within the ```misc``` folder.
 
 * Run the demo scripts:
 ``` bash
@@ -37,8 +38,8 @@ bash experiments/demo_vox.sh
 
 
 * The ```--gen_video``` argument is by default on, 
-```ffmpeg``` is required to use this flag in linux systems. 
-All frames along with an ```avconcat.mp4``` video file will be saved in the ```./results``` folder 
+[ffmpeg](https://www.ffmpeg.org/) >= 4.2.0 is required to use this flag in linux systems. 
+All frames along with an ```avconcat.mp4``` video file will be saved in the ```./id_517600055_pose_517600078_audio_681600002/results``` folder 
 in the following form:
 
 <img src='./misc/output.gif' width=320>
@@ -46,25 +47,25 @@ in the following form:
 From left to right are the reference input, the generated results,
 the pose source video and the original video synced with the driving audio.
 
-## Preparing Testing Data
+## Prepare Testing Meta Data
 
-### Automatic VoxCeleb2 Data Formulation
+* ### Automatic VoxCeleb2 Data Formulation
 
-Our code ```experiments/demo.sh``` refers to ```./misc/demo.csv``` for testing data paths. 
-In linux systems, it can be created automatically by running:
+The inference code ```experiments/demo.sh``` refers to ```./misc/demo.csv``` for testing data paths. 
+In linux systems, any applicable ```csv``` file can be created automatically by running:
 
 ```bash
-python scripts/prepare_testing_files.py --src_pose_path 
+python scripts/prepare_testing_files.py
 ```
 
-Then modify the ```meta_path_vox``` to ```'./misc/demo2.csv'``` and run
+Then modify the ```meta_path_vox``` in ```experiments/demo_vox.sh``` to ```'./misc/demo2.csv'``` and run
 
 ``` bash
 bash experiments/demo_vox.sh
 ```
-An additional result can be seen saved.
+An additional result should be seen saved. 
 
-### Metadata Details
+* ### Metadata Details
 
 Detailedly, in ```scripts/prepare_testing_files.py``` there are certain flags which enjoy great flexibility when formulating the metadata:
 
@@ -82,11 +83,14 @@ this flags could provide the folder containing the video frames synced with the 
 
 5. ```--csv_path``` the path to the metadata.
 
-### Self-Prepared Data Cropping
-For self-prepared data, VoxCeleb2-like cropping is needed
-for our network to handle.
-
 You can manually modify the metadata ```csv``` file or add lines to it according to the rules defined in the preprocessing file or the dataloader.
+
+We provide a number of demo choices in the ```misc``` folder, including several ones used in our [video](https://www.youtube.com/watch?v=lNQQHIggnUg).
+Feel free to rearrange them even across folders.
+
+* ### Self-Prepared Data Processing
+Our model handles only **VoxCeleb2-like** cropped data, thus pre-processing is needed for self-prepared data.
+
 
 
 ## Train Your Own Model
@@ -96,7 +100,7 @@ You can manually modify the metadata ```csv``` file or add lines to it according
 
 The usage of this software is under [CC-BY-4.0](https://github.com/Hangz-nju-cuhk/Talking-Face_PC-AVS/LICENSE).
 ```
-@InProceedings{Zhou2021pose,
+@InProceedings{zhou2021pose,
 author = {Zhou, Hang and Sun, Yasheng and Wu, Wayne and Loy, Chen Change and Wang, Xiaogang and Liu, Ziwei},
 title = {Pose-Controllable Talking Face Generation by Implicitly Modularized Audio-Visual Representation},
 booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
@@ -106,3 +110,4 @@ year = {2021}
 
 ## Acknowledgement
 * The structure of this codebase is borrowed from [SPADE](https://github.com/NVlabs/SPADE).
+* The generator is borrowed from [stylegan2-pytorch](https://github.com/rosinality/stylegan2-pytorch).
