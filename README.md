@@ -42,10 +42,10 @@ bash experiments/demo_vox.sh
 All frames along with an ```avconcat.mp4``` video file will be saved in the ```./id_517600055_pose_517600078_audio_681600002/results``` folder 
 in the following form:
 
-<img src='./misc/output.gif' width=320>
+<img src='./misc/output.gif' width=480>
 
-From left to right are the reference input, the generated results,
-the pose source video and the original video synced with the driving audio.
+From left to right are the *reference input*, the *generated results*,
+the *pose source video* and the *synced original video* with the driving audio.
 
 ## Prepare Testing Meta Data
 
@@ -81,17 +81,17 @@ this flags could provide the folder containing the video frames synced with the 
 
 4. ```--src_input_path``` is the path to the input reference image. When the path is  a video file, we will convert it to frames.
 
-5. ```--csv_path``` the path to the metadata.
+5. ```--csv_path``` the path to the to-be-saved metadata.
 
-You can manually modify the metadata ```csv``` file or add lines to it according to the rules defined in the preprocessing file or the dataloader.
+You can manually modify the metadata ```csv``` file or add lines to it according to the rules defined in the ```scripts/prepare_testing_files.py``` file or the dataloader ```data/voxtest_dataset.py```.
 
 We provide a number of demo choices in the ```misc``` folder, including several ones used in our [video](https://www.youtube.com/watch?v=lNQQHIggnUg).
-Feel free to rearrange them even across folders.
+Feel free to rearrange them even across folders. And you are welcome to record audio files by yourself.
 
 * ### Self-Prepared Data Processing
 Our model handles only **VoxCeleb2-like** cropped data, thus pre-processing is needed for self-prepared data.
 
-
+* Coming soon
 
 ## Train Your Own Model
 * Coming soon
@@ -111,3 +111,4 @@ year = {2021}
 ## Acknowledgement
 * The structure of this codebase is borrowed from [SPADE](https://github.com/NVlabs/SPADE).
 * The generator is borrowed from [stylegan2-pytorch](https://github.com/rosinality/stylegan2-pytorch).
+* The audio encoder is borrowed from [voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer).
