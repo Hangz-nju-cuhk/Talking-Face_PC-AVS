@@ -38,7 +38,7 @@ bash experiments/demo_vox.sh
 
 
 * The ```--gen_video``` argument is by default on, 
-[ffmpeg](https://www.ffmpeg.org/) >= 4.2.0 is required to use this flag in linux systems. 
+[ffmpeg](https://www.ffmpeg.org/) >= 4.0.0 is required to use this flag in linux systems. 
 All frames along with an ```avconcat.mp4``` video file will be saved in the ```./id_517600055_pose_517600078_audio_681600002/results``` folder 
 in the following form:
 
@@ -91,7 +91,19 @@ Feel free to rearrange them even across folders. And you are welcome to record a
 * ### Self-Prepared Data Processing
 Our model handles only **VoxCeleb2-like** cropped data, thus pre-processing is needed for self-prepared data.
 
-* Coming soon
+To process self-prepared data [face-alignment](https://github.com/1adrianb/face-alignment) is needed. It can be installed by running
+```
+pip install face-alignment
+```
+
+Assuming that a video is already processed into a ```[name]``` folder  by previous steps through ```prepare_testing_files.py```, 
+you can run 
+```
+python scripts/align_68.py --folder_path [name]
+```
+
+The cropped images will be saved at an additional ```[name_cropped]``` folder.
+Then you can manually change the ```demo.csv``` file or alter the directory folder path and run the preprocessing file again.
 
 ## Train Your Own Model
 * Coming soon
