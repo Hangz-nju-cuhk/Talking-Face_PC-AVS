@@ -27,7 +27,7 @@ pip install -r requirements.txt
 * Download the pre-trained [checkpoints](https://drive.google.com/file/d/1Zehr3JLIpzdg2S5zZrhIbpYPKF-4gKU_/view?usp=sharing).
 
 * Create the default folder ```./checkpoints``` and 
-unzip the ```demo.zip``` at ```./checkpoints/demo```. There should be a 5 ```pth```s in it.
+unzip the ```demo.zip``` at ```./checkpoints/demo```. There should be 5 ```pth```s in it.
 
 * Unzip all ```*.zip``` files within the ```misc``` folder.
 
