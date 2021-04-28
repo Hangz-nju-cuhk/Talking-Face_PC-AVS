@@ -53,6 +53,9 @@ def inference_single_audio(opt, path_label, model):
         video_names = ['Input_', 'G_Pose_Driven_', 'Pose_Source_', 'Mouth_Source_']
     else:
         video_names = ['Input_', 'G_Fix_Pose_', 'Mouth_Source_']
+    is_mouth_frame = os.path.isdir(dataloader.dataset.mouth_frame_path)
+    if not is_mouth_frame:
+        video_names.pop()
     save_paths = []
     for name in video_names:
         save_path = os.path.join(processed_file_savepath, name)
@@ -72,7 +75,8 @@ def inference_single_audio(opt, path_label, model):
             else:
                 util.save_torch_img(fake_image_original_pose_a[num],
                                     os.path.join(save_paths[1], video_names[1] + str(idx) + '.jpg'))
-            util.save_torch_img(data_i['target'][num], os.path.join(save_paths[-1], video_names[-1] + str(idx) + '.jpg'))
+            if is_mouth_frame:
+                util.save_torch_img(data_i['target'][num], os.path.join(save_paths[-1], video_names[-1] + str(idx) + '.jpg'))
             idx += 1
 
     if opt.gen_video:
