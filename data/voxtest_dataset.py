@@ -167,7 +167,7 @@ class VOXTestDataset(BaseDataset):
 
         pose_frame = self.load_one_frame(pose_index, self.pose_frame_path)
 
-        if self.mouth_frame_path:
+        if os.path.isdir(self.mouth_frame_path):
             mouth_frame = self.load_one_frame(img_index, self.mouth_frame_path)
         else:
             mouth_frame = torch.zeros_like(pose_frame)

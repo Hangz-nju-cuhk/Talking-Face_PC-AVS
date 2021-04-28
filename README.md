@@ -3,7 +3,7 @@
 [Hang Zhou](https://hangz-nju-cuhk.github.io/), Yasheng Sun, [Wayne Wu](https://wywu.github.io/), [Chen Change Loy](http://personal.ie.cuhk.edu.hk/~ccloy/), [Xiaogang Wang](http://www.ee.cuhk.edu.hk/~xgwang/), and [Ziwei Liu](https://liuziwei7.github.io/).
 
 
-<img src='./misc/demo.gif' width=720>
+<img src='./misc/demo.gif' width=800>
 
 ### [Project](https://hangz-nju-cuhk.github.io/projects/PC-AVS) | [Paper](https://arxiv.org/abs/1807.07860) | [Demo](https://www.youtube.com/watch?v=lNQQHIggnUg)
 
@@ -13,7 +13,7 @@ which achieves free pose control when driving arbitrary talking faces with audio
 The key is to devise an implicit low-dimension pose code that is free of mouth shape or identity information. 
 In this way, audio-visual representations are modularized into spaces of three key factors: speech content, head pose, and identity information.
 
-<img src='./misc/method.png' width=880>
+<img src='./misc/method.png' width=800>
 
 ## Requirements
 * Python 3.6 and [Pytorch](https://pytorch.org/) 1.3.0 are used. Basic requirements are listed in the 'requirements.txt'.
@@ -39,10 +39,10 @@ bash experiments/demo_vox.sh
 
 * The ```--gen_video``` argument is by default on, 
 [ffmpeg](https://www.ffmpeg.org/) >= 4.2.0 is required to use this flag in linux systems. 
-All frames along with an ```avconcat.mp4``` video file will be saved in the ```./id_517600055_pose_517600078_audio_681600002/results``` folder 
+All frames along with an ```avconcat.mp4``` video file will be saved in the ```results/id_517600055_pose_517600078_audio_681600002/results``` folder 
 in the following form:
 
-<img src='./misc/output.gif' width=480>
+<img src='./misc/output.gif' width=400>
 
 From left to right are the *reference input*, the *generated results*,
 the *pose source video* and the *synced original video* with the driving audio.
