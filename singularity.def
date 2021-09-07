@@ -1,0 +1,48 @@
+Bootstrap: docker
+From: ubuntu:18.04
+Stage: build
+
+%post
+        export ENV DEBIAN_FRONTEND=noninteractive
+        apt-get update && apt-get install -y netcat python3 python3-pip wget curl unzip git ffmpeg libsm6 libxext6 python3-opencv
+
+        pip3 install --upgrade pip
+
+	pip3 install gdown
+	pip3 install "torch>=1.2.0"
+	pip3 install torchvision
+	pip3 install "dominate>=2.3.1"
+	pip3 install dill
+	pip3 install scikit-image
+	pip3 install "numpy>=1.15.4"
+	pip3 install "scipy>=1.1.0"
+	pip3 install matplotlib
+	pip3 install "opencv-python>=3.4.3.18"
+	pip3 install "tensorboard==1.14.0"
+	pip3 install tqdm
+	pip3 install librosa
+	pip3 install lws
+
+        mkdir /talkingface/
+        cd /talkingface/
+        git clone --depth 1 https://github.com/NormanTUD/Talking-Face_PC-AVS .
+
+	cd misc
+
+	unzip Audio_Source.zip
+	unzip Input.zip
+	unzip Mouth_Source.zip
+	unzip Pose_Source.zip
+
+	cd ..
+
+	mkdir checkpoints
+	cd checkpoints
+
+	gdown "https://drive.google.com/uc?export=download&id=1Zehr3JLIpzdg2S5zZrhIbpYPKF-4gKU_"
+	unzip demo.zip
+
+	cd ..
+%labels
+        Author norman.koch@tu-dresden.de
+        Version v1.0.0

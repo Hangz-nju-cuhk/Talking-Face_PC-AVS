@@ -10,3 +10,4 @@ opencv-python>=3.4.3.18
 tensorboard==1.14.0
 tqdm
 librosa
+lws
