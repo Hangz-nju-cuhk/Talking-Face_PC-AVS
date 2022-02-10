@@ -2,6 +2,7 @@
 
 [Hang Zhou](https://hangz-nju-cuhk.github.io/), Yasheng Sun, [Wayne Wu](https://wywu.github.io/), [Chen Change Loy](http://personal.ie.cuhk.edu.hk/~ccloy/), [Xiaogang Wang](http://www.ee.cuhk.edu.hk/~xgwang/), and [Ziwei Liu](https://liuziwei7.github.io/).
 
+[colab](https://drive.google.com/file/d/1FmWdw6IR7FuPbif78PLgEXvYkafWHd_9/view?usp=sharing)
 
 <img src='./misc/demo.gif' width=800>
 
