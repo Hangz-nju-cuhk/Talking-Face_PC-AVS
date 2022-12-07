@@ -106,7 +106,7 @@ The cropped images will be saved at an additional ```[name_cropped]``` folder.
 Then you can manually change the ```demo.csv``` file or alter the directory folder path and run the preprocessing file again.
 
 ## Train Your Own Model
-* Coming soon
+* Not supported yet.
 
 ## License and Citation
 
