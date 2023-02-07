@@ -105,6 +105,24 @@ python scripts/align_68.py --folder_path [name]
 The cropped images will be saved at an additional ```[name_cropped]``` folder.
 Then you can manually change the ```demo.csv``` file or alter the directory folder path and run the preprocessing file again.
 
+## Have More Fun
+* We also support synthesizing and driving a talking head solely from audio. 
+* Download the pre-trained [checkpoints](https://drive.google.com/file/d/15ZnNDLixT841cFi6hWP6IpOPU_JqFcd_/view?usp=sharing).
+* Checkout another branch.
+``` bash
+git checkout speech2talkingface
+```
+* Follow similar steps as quick start and run the demo scripts.
+``` bash
+bash experiments/demo_vox.sh
+```
+
+<img src='./misc/demo_id.gif' width=400>
+
+From left to right are the *generated results*,
+the *pose source video* and the *synced original video* with the driving audio.
+
+
 ## Train Your Own Model
 * Not supported yet.
 
