@@ -1,14 +1,7 @@
-#meta_path_vox='./misc/qual2.csv'
-#meta_path_vox='./misc/demo.csv'
-#meta_path_vox='./misc/teaser.csv'
 meta_path_vox='./misc/demo_id.csv'
 
-
 jobname=demo_id
-#jobname=demo
-#jobname=finetune_idA_wo_G/
-#jobname=demo_audio_id
-#jobname=finetune_VAG_w_word_loss
+
 python3.8 -u inference.py  \
         --name ${jobname} \
         --meta_path_vox ${meta_path_vox} \
