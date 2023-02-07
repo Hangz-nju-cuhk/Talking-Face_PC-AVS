@@ -118,6 +118,15 @@ title = {Pose-Controllable Talking Face Generation by Implicitly Modularized Aud
 booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
 year = {2021}
 }
+
+@inproceedings{sun2021speech2talking,
+  title={Speech2Talking-Face: Inferring and Driving a Face with Synchronized Audio-Visual Representation.},
+  author={Sun, Yasheng and Zhou, Hang and Liu, Ziwei and Koike, Hideki},
+  booktitle={IJCAI},
+  volume={2},
+  pages={4},
+  year={2021}
+}
 ```
 
 ## Acknowledgement
