@@ -108,7 +108,7 @@ Then you can manually change the ```demo.csv``` file or alter the directory fold
 ## Have More Fun
 * We also support synthesizing and driving a talking head solely from audio. 
 * Download the pre-trained [checkpoints](https://drive.google.com/file/d/15ZnNDLixT841cFi6hWP6IpOPU_JqFcd_/view?usp=sharing).
-* Checkout another branch.
+* Checkout the *speech2talkingface* branch.
 ``` bash
 git checkout speech2talkingface
 ```
