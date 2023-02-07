@@ -117,7 +117,7 @@ git checkout speech2talkingface
 bash experiments/demo_vox.sh
 ```
 
-<img src='./misc/demo_id.gif' width=400>
+<img src='./misc/demo_id.gif' width=300>
 
 From left to right are the *generated results*,
 the *pose source video* and the *synced original video* with the driving audio.
