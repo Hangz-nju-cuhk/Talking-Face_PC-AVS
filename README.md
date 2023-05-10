@@ -5,7 +5,7 @@
 
 <img src='./misc/demo.gif' width=800>
 
-### [Project](https://hangz-nju-cuhk.github.io/projects/PC-AVS) | [Paper](https://arxiv.org/abs/2104.11116) | [Demo](https://www.youtube.com/watch?v=lNQQHIggnUg)
+### [Project](https://hangz-nju-cuhk.github.io/projects/PC-AVS) | [Paper](https://arxiv.org/abs/2305.05445) | [Demo](https://www.youtube.com/watch?v=lNQQHIggnUg)
 
 
 We propose **Pose-Controllable Audio-Visual System (PC-AVS)**, 
