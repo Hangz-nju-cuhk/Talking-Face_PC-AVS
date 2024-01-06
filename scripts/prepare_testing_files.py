@@ -1,23 +1,21 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import argparse
-import glob
 import csv
+import glob
+import os
+import sys
+
 import numpy as np
-from config.AudioConfig import AudioConfig
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-def mkdir(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+from config.AudioConfig import AudioConfig  # noqa: E402
 
 
 def proc_frames(src_path, dst_path):
-    cmd = 'ffmpeg -i \"{}\" -start_number 0 -qscale:v 2 \"{}\"/%06d.jpg -loglevel error -y'.format(src_path, dst_path)
+    # -qp 0 is the lossless flag for mp4. For avi, it should be -q:v 1.
+    cmd = f'ffmpeg -i \"{src_path}\" -start_number 0 -qp 0 \"{dst_path}\"/%06d.jpg -loglevel error -y'
     os.system(cmd)
-    frames = glob.glob(os.path.join(dst_path, '*.jpg'))
-    return len(frames)
+    return len(glob.glob(os.path.join(dst_path, '*.jpg')))
 
 
 def proc_audio(src_mouth_path, dst_audio_path):
@@ -46,26 +44,25 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     dir_path = args.dir_path
-    mkdir(dir_path)
+    os.makedirs(dir_path, exist_ok=True)
 
     # ===================== process input =======================================================
     input_save_path = os.path.join(dir_path, 'Input')
-    mkdir(input_save_path)
+    os.makedirs(input_save_path, exist_ok=True)
     input_name = args.src_input_path.split('/')[-1].split('.')[0]
     num_inputs = 1
     dst_input_path = os.path.join(input_save_path, input_name)
-    mkdir(dst_input_path)
+    os.makedirs(dst_input_path, exist_ok=True)
     if args.src_input_path.split('/')[-1].split('.')[-1] == 'mp4':
         num_inputs = proc_frames(args.src_input_path, dst_input_path)
     elif os.path.isdir(args.src_input_path):
         dst_input_path = args.src_input_path
     else:
-        os.system('cp {} {}'.format(args.src_input_path, os.path.join(dst_input_path, args.src_input_path.split('/')[-1])))
-
+        os.system(f'cp {args.src_input_path} {os.path.join(dst_input_path, args.src_input_path.split("/")[-1])}')
 
     # ===================== process audio =======================================================
     audio_source_save_path = os.path.join(dir_path, 'Audio_Source')
-    mkdir(audio_source_save_path)
+    os.makedirs(audio_source_save_path, exist_ok=True)
     audio_name = args.src_audio_path.split('/')[-1].split('.')[0]
     spec_dir = 'None'
     dst_audio_path = os.path.join(audio_source_save_path, audio_name + '.mp3')
@@ -74,15 +71,17 @@ if __name__ == "__main__":
         os.system('cp {} {}'.format(args.src_audio_path, dst_audio_path))
         if args.src_mouth_frame_path and os.path.isdir(args.src_mouth_frame_path):
             dst_mouth_frame_path = args.src_mouth_frame_path
-            num_mouth_frames = len(glob.glob(os.path.join(args.src_mouth_frame_path, '*.jpg')) + glob.glob(os.path.join(args.src_mouth_frame_path, '*.png')))
+            src_mouth_frames = glob.glob(os.path.join(args.src_mouth_frame_path, '*.jpg')) + \
+                glob.glob(os.path.join(args.src_mouth_frame_path, '*.png'))
+            num_mouth_frames = len(src_mouth_frames)
         else:
             dst_mouth_frame_path = 'None'
             num_mouth_frames = 0
     else:
         mouth_source_save_path = os.path.join(dir_path, 'Mouth_Source')
-        mkdir(mouth_source_save_path)
+        os.makedirs(mouth_source_save_path, exist_ok=True)
         dst_mouth_frame_path = os.path.join(mouth_source_save_path, audio_name)
-        mkdir(dst_mouth_frame_path)
+        os.makedirs(dst_mouth_frame_path, exist_ok=True)
         proc_audio(args.src_audio_path, dst_audio_path)
         num_mouth_frames = proc_frames(args.src_audio_path, dst_mouth_frame_path)
 
@@ -91,19 +90,20 @@ if __name__ == "__main__":
         wav = audio.read_audio(dst_audio_path)
         spectrogram = audio.audio_to_spectrogram(wav)
         spec_dir = os.path.join(audio_source_save_path, audio_name + '.npy')
-        np.save(spec_dir,
-            spectrogram.astype(np.float32), allow_pickle=False)
+        np.save(spec_dir, spectrogram.astype(np.float32), allow_pickle=False)
 
     # ===================== process pose =======================================================
     if os.path.isdir(args.src_pose_path):
-        num_pose_frames = len(glob.glob(os.path.join(args.src_pose_path, '*.jpg')) + glob.glob(os.path.join(args.src_pose_path, '*.png')))
+        pose_frames = glob.glob(os.path.join(args.src_pose_path, '*.jpg')) + \
+            glob.glob(os.path.join(args.src_pose_path, '*.png'))
+        num_pose_frames = len(pose_frames)
         dst_pose_frame_path = args.src_pose_path
     else:
         pose_source_save_path = os.path.join(dir_path, 'Pose_Source')
-        mkdir(pose_source_save_path)
+        os.makedirs(pose_source_save_path, exist_ok=True)
         pose_name = args.src_pose_path.split('/')[-1].split('.')[0]
         dst_pose_frame_path = os.path.join(pose_source_save_path, pose_name)
-        mkdir(dst_pose_frame_path)
+        os.makedirs(dst_pose_frame_path, exist_ok=True)
         num_pose_frames = proc_frames(args.src_pose_path, dst_pose_frame_path)
 
     # ===================== form csv =======================================================

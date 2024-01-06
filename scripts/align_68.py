@@ -1,18 +1,17 @@
-import face_alignment
-import os
-import cv2
-import skimage.transform as trans
 import argparse
-import torch
+import os
+
+import cv2
+import face_alignment
 import numpy as np
+import skimage.transform as trans
+import torch
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
 def get_affine(src):
-    dst = np.array([[87,  59],
-                    [137,  59],
-                    [112, 120]], dtype=np.float32)
+    dst = np.array([[87, 59], [137, 59], [112, 120]], dtype=np.float32)
     tform = trans.SimilarityTransform()
     tform.estimate(src, dst)
     M = tform.params[0:2, :]
@@ -44,8 +43,8 @@ def get_mouth_bias(three_points):
 
 
 def align_folder(folder_path, folder_save_path):
-
-    fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, device=device)
+    fa = face_alignment.FaceAlignment(face_alignment.LandmarksType.TWO_D,
+                                      device=device)
     preds = fa.get_landmarks_from_directory(folder_path)
 
     sumpoints = 0
@@ -90,12 +89,16 @@ def align_folder(folder_path, folder_save_path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--folder_path', help='the folder which needs processing')
+    parser.add_argument('--folder_path',
+                        help='the folder which needs processing')
     args = parser.parse_args()
 
     if os.path.isdir(args.folder_path):
         home_path = '/'.join(args.folder_path.split('/')[:-1])
-        save_img_path = os.path.join(home_path, args.folder_path.split('/')[-1] + '_cropped')
+        save_img_path = os.path.join(
+            home_path,
+            args.folder_path.split('/')[-1] + '_cropped'
+        )
         os.makedirs(save_img_path, exist_ok=True)
 
         align_folder(args.folder_path, save_img_path)
