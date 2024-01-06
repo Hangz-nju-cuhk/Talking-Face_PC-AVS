@@ -1,5 +1,11 @@
 meta_path_vox='./misc/demo.csv'
 
+# If there is an argument, use it as the $meta_path_vox
+if [ $# -eq 1 ]
+  then
+    meta_path_vox=$1
+fi
+
 python -u inference.py  \
         --name demo \
         --meta_path_vox ${meta_path_vox} \
